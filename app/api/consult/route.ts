@@ -26,7 +26,62 @@ const SYSTEM_PROMPT = `あなたは大阪市西淀川区の介護相談窓口「
 - 介護・高齢者支援・福祉と無関係の質問には回答せず、当窓口は介護のご相談窓口である旨を丁寧に伝える。
 - 回答本文のみを出力し、件名や前置きの説明は書かない。`;
 
+// 簡易レート制限（IP単位の固定ウィンドウ）。
+// 注: サーバインスタンス単位のメモリ保持のため、スケール時は厳密ではない。
+// 厳密な制限が必要な場合は Vercel KV / Upstash 等の共有ストアを利用する。
+const RATE_LIMIT_MAX = 6; // ウィンドウあたりの最大リクエスト数
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10分
+
+type RateEntry = { count: number; resetAt: number };
+const rateStore = new Map<string, RateEntry>();
+
+function getClientIp(request: Request): string {
+  const fwd = request.headers.get("x-forwarded-for");
+  if (fwd) return fwd.split(",")[0].trim();
+  return request.headers.get("x-real-ip")?.trim() || "unknown";
+}
+
+function checkRateLimit(ip: string): { allowed: boolean; retryAfter: number } {
+  const now = Date.now();
+  const entry = rateStore.get(ip);
+
+  if (!entry || now >= entry.resetAt) {
+    rateStore.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    if (rateStore.size > 5000) {
+      rateStore.forEach((value, key) => {
+        if (now >= value.resetAt) rateStore.delete(key);
+      });
+    }
+    return { allowed: true, retryAfter: 0 };
+  }
+
+  if (entry.count >= RATE_LIMIT_MAX) {
+    return {
+      allowed: false,
+      retryAfter: Math.ceil((entry.resetAt - now) / 1000),
+    };
+  }
+
+  entry.count += 1;
+  return { allowed: true, retryAfter: 0 };
+}
+
 export async function POST(request: Request) {
+  const ip = getClientIp(request);
+  const rate = checkRateLimit(ip);
+  if (!rate.allowed) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: `ご相談が短時間に集中しています。少し時間をおいてお試しいただくか、お電話（${ORG_TEL}）またはメール（${ORG_MAIL}）でご連絡ください。`,
+      },
+      {
+        status: 429,
+        headers: { "Retry-After": String(rate.retryAfter) },
+      },
+    );
+  }
+
   let body: unknown;
   try {
     body = await request.json();
