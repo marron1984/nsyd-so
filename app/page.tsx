@@ -192,6 +192,17 @@ export default function Page() {
           <div className="cert">大阪府指定 介護保険事業者</div>
         </div>
       </footer>
+
+      <nav className="mobile-cta" aria-label="お問い合わせ">
+        <a className="mcta mcta-tel" href="tel:0644009333">
+          <span className="mcta-label">電話で相談</span>
+          <span className="mcta-sub">平日 9-18時</span>
+        </a>
+        <a className="mcta mcta-ai" href="#ai">
+          <span className="mcta-label">AIに相談</span>
+          <span className="mcta-sub">無料・その場で</span>
+        </a>
+      </nav>
     </>
   );
 }
