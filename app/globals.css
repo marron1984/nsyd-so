@@ -85,13 +85,14 @@ body {
 .hero-photo {
   margin: 44px auto 0;
   max-width: 640px;
-  aspect-ratio: 16 / 10;
   border-radius: var(--radius);
-  background-color: var(--bg-alt);
-  background-image: url("/hero.jpg");
-  background-size: cover;
-  background-position: center 30%;
-  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.hero-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 /* ── Sections ───────────────────────────── */

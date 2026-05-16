@@ -1,5 +1,7 @@
 import QuickConsult from "@/components/QuickConsult";
 import MailForm from "@/components/MailForm";
+import Image from "next/image";
+import heroImg from "@/public/hero.png";
 
 const worries = [
   "同居の家族が認知症で、対応に困っている",
@@ -46,11 +48,15 @@ export default function Page() {
           <div className="hero-badge">
             どんなことでもお気軽にご相談ください
           </div>
-          <div
-            className="hero-photo"
-            role="img"
-            aria-label="車いすの高齢の女性と、寄り添って笑顔で話す介護スタッフ"
-          />
+          <div className="hero-photo">
+            <Image
+              src={heroImg}
+              alt="車いすの高齢の女性と、寄り添って笑顔で話す介護スタッフ"
+              priority
+              placeholder="blur"
+              sizes="(max-width: 680px) 100vw, 640px"
+            />
+          </div>
         </div>
       </header>
 
