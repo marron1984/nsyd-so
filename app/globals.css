@@ -33,7 +33,7 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   word-break: normal;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   line-break: strict;
 }
 
@@ -232,16 +232,17 @@ section {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   width: 100%;
-  max-width: 420px;
+  max-width: 440px;
   background: var(--green);
   color: #fff;
-  font-size: clamp(1.9rem, 9vw, 2.6rem);
+  font-size: clamp(1.5rem, 7vw, 2.3rem);
   font-weight: 800;
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
+  white-space: nowrap;
   text-decoration: none;
-  padding: 18px 20px;
+  padding: 18px 16px;
   border-radius: 14px;
   min-height: 64px;
 }
@@ -252,8 +253,8 @@ section {
 
 .phone-number::before {
   content: "";
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
   flex: none;
   background: #fff;
   -webkit-mask: center / contain no-repeat
@@ -301,9 +302,8 @@ section {
 }
 
 .step {
-  display: grid;
-  grid-template-columns: 48px 1fr;
-  align-items: center;
+  display: flex;
+  align-items: flex-start;
   gap: 16px;
   text-align: left;
   background: var(--bg-alt);
@@ -312,7 +312,13 @@ section {
   padding: 20px;
 }
 
+.step-body {
+  flex: 1;
+  min-width: 0;
+}
+
 .step .num {
+  flex: none;
   width: 48px;
   height: 48px;
   background: var(--green);
@@ -609,9 +615,9 @@ footer .cert {
     gap: 24px;
   }
   .step {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    justify-items: center;
     padding: 28px 22px;
   }
   .step .num {

@@ -122,8 +122,10 @@ export default function Page() {
             {steps.map((s) => (
               <div className="step" key={s.num}>
                 <div className="num">{s.num.replace("STEP ", "")}</div>
-                <h4>{s.title}</h4>
-                <p>{s.body}</p>
+                <div className="step-body">
+                  <h4>{s.title}</h4>
+                  <p>{s.body}</p>
+                </div>
               </div>
             ))}
           </div>
