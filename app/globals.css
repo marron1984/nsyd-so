@@ -82,6 +82,18 @@ body {
   font-size: 0.9rem;
 }
 
+.hero-photo {
+  margin: 44px auto 0;
+  max-width: 640px;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius);
+  background-color: var(--bg-alt);
+  background-image: url("/hero.jpg");
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+}
+
 /* ── Sections ───────────────────────────── */
 section {
   padding: 72px 0;

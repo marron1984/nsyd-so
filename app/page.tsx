@@ -46,6 +46,11 @@ export default function Page() {
           <div className="hero-badge">
             どんなことでもお気軽にご相談ください
           </div>
+          <div
+            className="hero-photo"
+            role="img"
+            aria-label="車いすの高齢の女性と、寄り添って笑顔で話す介護スタッフ"
+          />
         </div>
       </header>
 
