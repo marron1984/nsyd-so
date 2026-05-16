@@ -1,4 +1,3 @@
-import QuickConsult from "@/components/QuickConsult";
 import MailForm from "@/components/MailForm";
 import Image from "next/image";
 import heroImg from "@/public/hero.png";
@@ -35,6 +34,41 @@ const services = [
   "訪問介護・訪問看護のご利用について",
   "一人暮らしのご親族の見守りについて",
   "ご家族の住まい、サポート付き住宅の選び方",
+];
+
+const faqs = [
+  {
+    q: "相談は無料ですか？",
+    a: "はい、ご相談は無料です。秘密厳守で、内容は守秘義務をもって取り扱います。お話を伺うだけでも構いません。",
+  },
+  {
+    q: "本人ではなく、家族や近所の者でも相談できますか？",
+    a: "もちろん可能です。ご家族や、近隣で気になる高齢の方についてのご相談も承っています。一人で抱え込まず、お気軽にご連絡ください。",
+  },
+  {
+    q: "相談したら、必ずサービスの契約が必要になりますか？",
+    a: "いいえ。ご相談いただいても契約や利用の義務は一切ありません。営業目的のご連絡もいたしません。",
+  },
+  {
+    q: "どんなことを相談できますか？",
+    a: "認知症のご家族への接し方、介護保険や要介護認定の流れ、訪問介護・訪問看護、一人暮らしのご親族の見守り、住まいの選び方など、介護に関することを幅広くお伺いします。",
+  },
+  {
+    q: "要介護認定はどこに申請すればよいですか？",
+    a: "お住まいの市区町村の介護保険担当窓口、またはお近くの地域包括支援センターで申請できます。手続きの流れや必要な書類についても、当窓口でご案内します。",
+  },
+  {
+    q: "地域包括支援センターとは何ですか？",
+    a: "高齢の方の暮らしを地域で支える総合相談窓口です。介護・福祉・健康・医療など、さまざまな面から支援します。必要に応じて当窓口からご案内します。",
+  },
+  {
+    q: "訪問しての相談もできますか？",
+    a: "必要に応じて、訪問でのご相談も可能です。まずはお電話またはメールでご状況をお聞かせください。",
+  },
+  {
+    q: "受付時間外や、急ぎのときはどうすればよいですか？",
+    a: "受付時間は平日 9:00〜18:00 です。生命や安全に関わる緊急の場合は、ためらわず救急（119）・警察（110）、またはお近くの医療機関へご連絡ください。",
+  },
 ];
 
 export default function Page() {
@@ -145,17 +179,23 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="contact" id="ai">
+      <section id="faq">
         <div className="wrap">
-          <h2 className="section-title pink">AIに簡単相談（無料・その場で回答）</h2>
+          <h2 className="section-title">よくあるご質問</h2>
           <p className="section-sub">
-            「まず何から始めれば？」そんな疑問に、AIがその場でお答えします。
-            <br />
-            個別の詳しいご相談は、専門スタッフが承ります。
+            ご相談の前に、よくいただくご質問をまとめました。
           </p>
-          <div className="contact-card">
-            <QuickConsult />
+          <div className="faq-list">
+            {faqs.map((f) => (
+              <details className="faq-item" key={f.q}>
+                <summary>{f.q}</summary>
+                <div className="faq-answer">{f.a}</div>
+              </details>
+            ))}
           </div>
+          <p className="form-note" style={{ marginTop: "28px" }}>
+            ここにないご質問も、お電話・メールでお気軽にどうぞ。
+          </p>
         </div>
       </section>
 
@@ -200,9 +240,9 @@ export default function Page() {
           <span className="mcta-label">電話で相談</span>
           <span className="mcta-sub">平日 9-18時</span>
         </a>
-        <a className="mcta mcta-ai" href="#ai">
-          <span className="mcta-label">AIに相談</span>
-          <span className="mcta-sub">無料・その場で</span>
+        <a className="mcta mcta-mail" href="#contact">
+          <span className="mcta-label">メールで相談</span>
+          <span className="mcta-sub">24時間受付</span>
         </a>
       </nav>
     </>
