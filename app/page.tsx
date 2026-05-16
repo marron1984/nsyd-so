@@ -1,4 +1,5 @@
-import ContactForm from "@/components/ContactForm";
+import QuickConsult from "@/components/QuickConsult";
+import MailForm from "@/components/MailForm";
 
 const worries = [
   "同居の家族が認知症で、対応に困っている",
@@ -131,16 +132,30 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="contact" id="contact">
+      <section className="contact" id="ai">
         <div className="wrap">
-          <h2 className="section-title pink">メールでのご相談</h2>
+          <h2 className="section-title pink">AIに簡単相談（無料・その場で回答）</h2>
           <p className="section-sub">
-            お電話が難しい方は、こちらからどうぞ。
+            「まず何から始めれば？」そんな疑問に、AIがその場でお答えします。
             <br />
-            介護相談窓口より、折り返しご返信いたします。
+            個別の詳しいご相談は、専門スタッフが承ります。
           </p>
           <div className="contact-card">
-            <ContactForm />
+            <QuickConsult />
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div className="wrap">
+          <h2 className="section-title">メールでのご相談</h2>
+          <p className="section-sub">
+            じっくりご相談されたい方は、メールでどうぞ。
+            <br />
+            担当の専門スタッフが内容を確認し、手動でご返信いたします。
+          </p>
+          <div className="contact-card">
+            <MailForm />
           </div>
         </div>
       </section>
@@ -159,7 +174,7 @@ export default function Page() {
             ケアマネジメント
           </p>
           <p>〒555-0024　大阪府大阪市西淀川区野里 1-32-14 パシフィック塚本 610</p>
-          <p>電話：06-4400-9333</p>
+          <p>電話：06-4400-9333　／　メール：ek@aska-g.com</p>
           <p>
             JR 塚本駅・JR 御幣島駅・阪神姫島駅　各駅より徒歩 10 分圏内
           </p>
