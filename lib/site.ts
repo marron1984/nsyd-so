@@ -1,5 +1,5 @@
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://nsyd-so.vercel.app"
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://nishiyodo.cafe"
 ).replace(/\/$/, "");
 
 export const ORG = {
