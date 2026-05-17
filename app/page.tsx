@@ -1,3 +1,4 @@
+import Link from "next/link";
 import MailForm from "@/components/MailForm";
 import Image from "next/image";
 import heroImg from "@/public/hero.png";
@@ -98,6 +99,14 @@ const jsonLd = {
       },
       areaServed: { "@type": "City", name: "大阪市西淀川区" },
       knowsLanguage: "ja",
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: ORG.telE164,
+        email: ORG.email,
+        contactType: "介護相談",
+        areaServed: "JP",
+        availableLanguage: "Japanese",
+      },
       openingHoursSpecification: [
         {
           "@type": "OpeningHoursSpecification",
@@ -114,8 +123,27 @@ const jsonLd = {
       ],
     },
     {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: ORG.name,
+      inLanguage: "ja",
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/#webpage`,
+      url: SITE_URL,
+      name: "大阪市西淀川区の介護相談｜西淀川いいかいご相談ダイヤル",
+      inLanguage: "ja",
+      isPartOf: { "@id": `${SITE_URL}/#website` },
+      about: { "@id": `${SITE_URL}/#organization` },
+      primaryImageOfPage: `${SITE_URL}/hero.png`,
+    },
+    {
       "@type": "FAQPage",
       "@id": `${SITE_URL}/#faq`,
+      isPartOf: { "@id": `${SITE_URL}/#website` },
       mainEntity: faqs.map((f) => ({
         "@type": "Question",
         name: f.q,
@@ -314,6 +342,10 @@ export default function Page() {
             JR 塚本駅・JR 御幣島駅・阪神姫島駅　各駅より徒歩 10 分圏内
           </p>
           <div className="cert">大阪府指定 介護保険事業者</div>
+          <nav className="footer-nav" aria-label="サイト情報">
+            <Link href="/operator">運営者情報</Link>
+            <Link href="/privacy">プライバシーポリシー</Link>
+          </nav>
         </div>
       </footer>
 

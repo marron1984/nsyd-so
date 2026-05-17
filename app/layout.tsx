@@ -33,6 +33,12 @@ export const metadata: Metadata = {
   publisher: ORG.legalName,
   alternates: { canonical: "/" },
   category: "介護・福祉",
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+    other: process.env.BING_SITE_VERIFICATION
+      ? { "msvalidate.01": process.env.BING_SITE_VERIFICATION }
+      : {},
+  },
   robots: {
     index: true,
     follow: true,
