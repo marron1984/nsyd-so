@@ -125,6 +125,28 @@ export default function Page() {
         </div>
       </section>
 
+      <section className="staff">
+        <div className="wrap">
+          <div className="center">
+            <span className="ribbon">相談するのは、介護のプロです</span>
+          </div>
+          <div className="staff-badges">
+            <span>看護師</span>
+            <span>介護福祉士</span>
+          </div>
+          <p className="staff-lead">
+            介護の現場に<strong>長年携わってきた看護師・介護福祉士</strong>が、
+            直接お話を伺います。医療と介護の両方の視点から、ご家族お一人
+            おひとりの状況に寄り添ってご案内します。
+          </p>
+          <ul className="staff-points">
+            <li>現場経験が豊富で、認知症や在宅介護のお悩みに具体的に対応</li>
+            <li>医療と介護、両面からアドバイスできる</li>
+            <li>介護保険や地域包括支援センター等、公的制度にも精通</li>
+          </ul>
+        </div>
+      </section>
+
       <section className="phone-cta" id="tel">
         <div className="wrap">
           <div className="phone-card">
