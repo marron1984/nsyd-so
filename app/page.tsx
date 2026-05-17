@@ -1,6 +1,7 @@
 import MailForm from "@/components/MailForm";
 import Image from "next/image";
 import heroImg from "@/public/hero.png";
+import { SITE_URL, ORG } from "@/lib/site";
 
 const worries = [
   "同居の家族が認知症で、対応に困っている",
@@ -71,9 +72,66 @@ const faqs = [
   },
 ];
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["LocalBusiness", "GovernmentService"],
+      "@id": `${SITE_URL}/#organization`,
+      name: ORG.name,
+      alternateName: ORG.alternateName,
+      description:
+        "大阪市西淀川区の介護相談窓口。経験豊富な看護師・介護福祉士が、介護のお悩みを無料・秘密厳守でお伺いします。",
+      url: SITE_URL,
+      telephone: ORG.telE164,
+      email: ORG.email,
+      image: `${SITE_URL}/hero.png`,
+      priceRange: "無料",
+      parentOrganization: { "@type": "Organization", name: ORG.legalName },
+      address: {
+        "@type": "PostalAddress",
+        postalCode: ORG.postalCode,
+        addressRegion: ORG.region,
+        addressLocality: ORG.locality,
+        streetAddress: ORG.street,
+        addressCountry: "JP",
+      },
+      areaServed: { "@type": "City", name: "大阪市西淀川区" },
+      knowsLanguage: "ja",
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+          ],
+          opens: "09:00",
+          closes: "18:00",
+        },
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${SITE_URL}/#faq`,
+      mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
+  ],
+};
+
 export default function Page() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <header className="hero">
         <div className="wrap hero-inner">
           <span className="region">西淀川</span>
@@ -94,6 +152,7 @@ export default function Page() {
         </div>
       </header>
 
+      <main>
       <section className="worry">
         <div className="wrap">
           <div className="center">
@@ -241,6 +300,7 @@ export default function Page() {
           <h2>まずは、ご相談を。</h2>
         </div>
       </section>
+      </main>
 
       <footer>
         <div className="wrap">
